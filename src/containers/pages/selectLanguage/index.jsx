@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 // COMPONENTS & UTILITIES
 import englishFlag from 'assets/british-english-flag.jpg';
 import arabicFlag from 'assets/arabic-flag.jpg';
-import bgImage from 'assets/bg-1.jpg';
+import bgImage from 'assets/bg-1.3.jpg';
 import { setLanguage } from 'store/slices/languageSlice';
 import { mainFormInitValues, mainFormValSchema } from './utilities/formUtils';
 import FlagButton from './components/FlagButton';
@@ -23,7 +23,7 @@ function SelectLanguage() {
   return (
     <Box
       sx={{
-        background: `linear-gradient(90deg, rgba(0,0,0,.8), rgba(0,0,0,.8)), url(${bgImage}) center/cover no-repeat`,
+        background: `linear-gradient(90deg, rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url(${bgImage}) center/cover no-repeat`,
       }}
     >
       <Container
