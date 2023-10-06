@@ -5,8 +5,9 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 // COMPONENTS & UTILITIES
+import logo from 'assets/saleh-logo.png';
 import englishFlag from 'assets/british-english-flag.jpg';
-import arabicFlag from 'assets/arabic-flag.jpg';
+import arabicFlag from 'assets/uae.jpg';
 import bgImage from 'assets/bg-1.3.jpg';
 import { setLanguage } from 'store/slices/languageSlice';
 import { mainFormInitValues, mainFormValSchema } from './utilities/formUtils';
@@ -26,10 +27,17 @@ function SelectLanguage() {
         background: `linear-gradient(90deg, rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url(${bgImage}) center/cover no-repeat`,
       }}
     >
+      <Box
+        className="d-flex align-items-center justify-content-center"
+        sx={{ position: 'absolute', top: 15, left: 0, right: 0 }}
+      >
+        <img width={400} src={logo} alt="Eris-Chatbot-logo" />
+      </Box>
+
       <Container
         fixed
         className="d-flex flex-column align-items-center justify-content-center py-3 py-md-2"
-        sx={{ minHeight: '100vh' }}
+        sx={{ minHeight: '600px', height: '100vh' }}
       >
         <Formik
           initialValues={mainFormInitValues}
@@ -82,6 +90,15 @@ function SelectLanguage() {
           )}
         </Formik>
       </Container>
+
+      <Box
+        className="text-white"
+        sx={{ position: 'absolute', bottom: 10, left: 0, right: 0, textAlign: 'center' }}
+      >
+        <Typography textTransform="uppercase" variant="caption">
+          Powered By Eris AI
+        </Typography>
+      </Box>
     </Box>
   );
 }
