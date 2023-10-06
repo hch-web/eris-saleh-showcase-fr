@@ -59,6 +59,8 @@
         "unnamedComponents": "arrow-function",
         "namedComponents": "function-declaration"
       }
-    ]
+    ],
+    "react/no-array-index-key": "off",
+    "no-plusplus": "off"
   }
 }

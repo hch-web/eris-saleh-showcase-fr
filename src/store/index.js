@@ -4,7 +4,7 @@ import languageSlice from './slices/languageSlice';
 
 const store = configureStore({
   reducer: {
-    language: languageSlice,
+    setup: languageSlice,
     ...serviceReducers,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(serviceMiddlewares),
