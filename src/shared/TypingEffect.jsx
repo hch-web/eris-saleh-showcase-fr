@@ -74,8 +74,9 @@ function TypingEffect({ text, isCompleted, handleStop }) {
         variant="body1"
         className="message"
         color="secondary.main"
-        textTransform="capitalize"
         fontSize={14}
+        whiteSpace="pre-line"
+        sx={{ wordBreak: 'break-word' }}
       >
         {displayText}
       </Typography>

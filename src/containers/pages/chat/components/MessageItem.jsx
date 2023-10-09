@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useMemo, useState } from 'react';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import propTypes from 'prop-types';
 
@@ -10,21 +10,32 @@ import TypingEffect from 'shared/TypingEffect';
 import { useChatBotContext } from '../context/ChatBotContext';
 
 function MessageItem({ message, isQuery, timestamp, type, isLast, onRegenerate }) {
-  const { isSpeaking, setSpeaking } = useChatBotContext();
-  const [isAnimationCompleted, setAnimationCompleted] = useState(isQuery);
+  const { isSpeaking, setStopped } = useChatBotContext();
+  const [isAnimationCompleted, setAnimationCompleted] = useState(false);
   const [isRegenerating, setRegenerating] = useState(false);
   const isAudio = type === 'audio';
-
-  useEffect(() => {
-    if (isAnimationCompleted) {
-      setSpeaking(false);
-    }
-  }, [isAnimationCompleted]);
 
   const handleRegenerate = () => {
     setRegenerating(true);
     onRegenerate();
   };
+
+  const handleStopResponse = () => {
+    setAnimationCompleted(true);
+    setStopped(true);
+  };
+
+  const isTimestamps = useMemo(() => {
+    if (isQuery) {
+      return true;
+    }
+
+    if (!isQuery && isAnimationCompleted) {
+      return true;
+    }
+
+    return false;
+  }, [isAnimationCompleted, isQuery]);
 
   return (
     <>
@@ -36,12 +47,13 @@ function MessageItem({ message, isQuery, timestamp, type, isLast, onRegenerate }
         )}
 
         {/* TEXT MESSAGE BOX */}
-        {isQuery && !isAudio ? (
+        {isQuery ? (
           <Typography
             variant="body1"
             color={!isQuery ? 'secondary.main' : 'white'}
-            textTransform="capitalize"
             fontSize={14}
+            whiteSpace="pre-line"
+            sx={{ wordBreak: 'break-word' }}
           >
             {message}
           </Typography>
@@ -53,7 +65,7 @@ function MessageItem({ message, isQuery, timestamp, type, isLast, onRegenerate }
           />
         )}
 
-        {isAnimationCompleted && !isAudio && (
+        {isTimestamps && (
           <Typography
             variant="caption"
             color="lightgrey"
@@ -74,7 +86,7 @@ function MessageItem({ message, isQuery, timestamp, type, isLast, onRegenerate }
               variant="outlined"
               color="greyColor"
               sx={messageResponseBtnStyles}
-              onClick={() => setAnimationCompleted(true)}
+              onClick={handleStopResponse}
             >
               Stop
             </Button>

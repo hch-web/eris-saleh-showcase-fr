@@ -29,6 +29,7 @@ function ChatPage() {
   const [chatMessages, setChatMessages] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [isSpeaking, setSpeaking] = useState(false);
+  const [isStopped, setStopped] = useState(false);
   const [recentQuery, setRecentQuery] = useState(null);
   const selectedLanguage = useSelector(state => state?.setup.language);
 
@@ -38,7 +39,15 @@ function ChatPage() {
   const { handleStartRecording, handleStopRecording, isRecording } =
     useWavesurferRecorder(socket, recordContRef, setChatMessages, setLoading);
 
-  const chatContextValue = useMemo(() => ({ isSpeaking, setSpeaking }), [isSpeaking]);
+  const chatContextValue = useMemo(
+    () => ({
+      isSpeaking,
+      setSpeaking,
+      isStopped,
+      setStopped,
+    }),
+    [isSpeaking, isStopped]
+  );
 
   const handleRegenerate = () => {
     setLoading(true);
@@ -155,11 +164,19 @@ function ChatPage() {
                 {!isRecording && <InputField name="message" />}
 
                 {isRecording ? (
-                  <IconButton {...formIconsProps} onClick={handleStopRecording}>
+                  <IconButton
+                    {...formIconsProps}
+                    type="button"
+                    onClick={handleStopRecording}
+                  >
                     <Stop />
                   </IconButton>
                 ) : (
-                  <IconButton {...formIconsProps} onClick={handleStartRecording}>
+                  <IconButton
+                    {...formIconsProps}
+                    type="button"
+                    onClick={handleStartRecording}
+                  >
                     <Mic />
                   </IconButton>
                 )}
