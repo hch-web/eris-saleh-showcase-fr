@@ -47,23 +47,24 @@ function MessageItem({ message, isQuery, timestamp, type, isLast, onRegenerate }
         )}
 
         {/* TEXT MESSAGE BOX */}
-        {isQuery ? (
-          <Typography
-            variant="body1"
-            color={!isQuery ? 'secondary.main' : 'white'}
-            fontSize={14}
-            whiteSpace="pre-line"
-            sx={{ wordBreak: 'break-word' }}
-          >
-            {message}
-          </Typography>
-        ) : (
-          <TypingEffect
-            text={message}
-            isCompleted={isAnimationCompleted}
-            handleStop={() => setAnimationCompleted(true)}
-          />
-        )}
+        {!isAudio &&
+          (isQuery ? (
+            <Typography
+              variant="body1"
+              color={!isQuery ? 'secondary.main' : 'white'}
+              fontSize={14}
+              whiteSpace="pre-line"
+              sx={{ wordBreak: 'break-word' }}
+            >
+              {message}
+            </Typography>
+          ) : (
+            <TypingEffect
+              text={message}
+              isCompleted={isAnimationCompleted}
+              handleStop={() => setAnimationCompleted(true)}
+            />
+          ))}
 
         {isTimestamps && (
           <Typography
