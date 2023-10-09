@@ -26,7 +26,7 @@ function MessageItem({ message, isQuery, timestamp, type, isLast, onRegenerate }
   };
 
   const isTimestamps = useMemo(() => {
-    if (isQuery) {
+    if (isQuery && !isAudio) {
       return true;
     }
 
