@@ -1,13 +1,7 @@
 import { useEffect } from 'react';
 import { getFormatedMsgDate } from '../utilities/helpers';
 
-function useHandleChatMessage(
-  socketRef,
-  chatMessages,
-  setMessages,
-  setLoading,
-  setSpeaking
-) {
+function useHandleChatMessage(socketRef, chatMessages, setMessages, setLoading) {
   useEffect(() => {
     if (socketRef.current) {
       const currentSocket = socketRef.current;
@@ -38,9 +32,9 @@ function useHandleChatMessage(
         endMessageItem.scrollIntoView({ behavior: 'smooth' });
       }
 
-      if (chatMessages?.at(-1)?.isQuery === false) {
-        setSpeaking(true);
-      }
+      // if (chatMessages?.at(-1)?.isQuery === false) {
+      //   setSpeaking(true);
+      // }
     }
   }, [chatMessages]);
 

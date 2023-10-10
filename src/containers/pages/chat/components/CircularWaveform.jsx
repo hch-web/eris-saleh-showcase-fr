@@ -2,7 +2,7 @@ import React, { memo, useEffect, useRef, useState } from 'react';
 import propTypes from 'prop-types';
 
 import staticCircle from 'assets/avatar-image.png';
-import spectrumAnimation from 'assets/circle-avatar-animation.gif';
+import spectrumAnimation from 'assets/circle-avatar-animation-2.gif';
 import { convertBase64ToBlob } from '../utilities/helpers';
 import { useChatBotContext } from '../context/ChatBotContext';
 
@@ -19,6 +19,7 @@ function CircularWaveform({ message }) {
 
       audio.addEventListener('play', () => {
         setAudioCompleted(false);
+        setSpeaking(true);
       });
 
       audio.addEventListener('ended', () => {
