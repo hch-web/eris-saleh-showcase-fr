@@ -32,6 +32,7 @@ function CircularWaveform({ message }) {
   }, [message]);
 
   useEffect(() => {
+    // eslint-disable-next-line no-console
     console.log('isSpeaking', isSpeaking);
     if (isSpeaking && isStopped) {
       audioRef.current.pause();
