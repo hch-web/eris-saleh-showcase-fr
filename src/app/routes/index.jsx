@@ -5,7 +5,7 @@ import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
 import GlobalLoader from 'containers/common/GlobalLoader';
 
 // PAGES
-const SelectLanguage = lazy(() => import('containers/pages/selectLanguage'));
+// const SelectLanguage = lazy(() => import('containers/pages/selectLanguage'));
 const ChatPage = lazy(() => import('containers/pages/chat'));
 
 function AppRoutes() {
@@ -14,9 +14,9 @@ function AppRoutes() {
       <Suspense fallback={<GlobalLoader />}>
         <Routes>
           <Route path="/" element={<Outlet />}>
-            <Route path="chat" element={<ChatPage />} />
+            <Route index element={<ChatPage />} />
 
-            <Route index element={<SelectLanguage />} />
+            {/* <Route index element={<SelectLanguage />} /> */}
           </Route>
         </Routes>
       </Suspense>

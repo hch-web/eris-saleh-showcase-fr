@@ -1,3 +1,7 @@
+export const chatPageContainerStyles = bgImage => ({
+  background: `url(${bgImage}) center/cover no-repeat`,
+});
+
 export const chatInputFieldStyles = {
   '*': { color: 'white !important' },
   '& fieldset': { borderColor: 'white' },
@@ -23,27 +27,11 @@ export const chatMessagesContainerStyles = {
   minHeight: 'calc(100vh - 200px)',
   padding: '12px 10px 12px 0',
 
-  // '@media screen and (min-height: 800px)': {
-  //   maxHeight: '650px',
-  //   height: '600px',
-  //   minHeight: '600px',
-  // },
-
   '@media screen and (max-width: 768px)': {
     width: '100%',
     padding: '12px 0 12px 0',
-  },
-
-  '&:hover': {
-    '&::-webkit-scrollbar-track': {
-      background: 'rgba(255,255,255,0.3)',
-      transition: '0.2s all ease-in-out',
-    },
-
-    '&::-webkit-scrollbar-thumb': {
-      background: 'rgba(255,255,255,0.5)',
-      borderRadius: '10px',
-    },
+    height: 'calc(100vh - 400px)',
+    minHeight: '100px',
   },
 
   '&::-webkit-scrollbar': {
@@ -52,13 +40,6 @@ export const chatMessagesContainerStyles = {
 
   '&::-webkit-scrollbar-track': {
     background: 'transparent',
-    borderRadius: '10px',
-    transition: '0.2s all ease-in-out',
-  },
-
-  '&::-webkit-scrollbar-thumb': {
-    background: 'trnasparent',
-    borderRadius: '10px',
   },
 };
 
@@ -90,20 +71,6 @@ export const messageStyles = (isSentByMe, isAudio) => ({
     background: 'none',
     padding: '8px 0',
     backdropFilter: 'none',
-
-    // 'audio::-webkit-media-controls-panel': {
-    //   background: 'rgba(0, 0, 0, 0)',
-    // },
-
-    // 'audio::-webkit-media-controls-play-button': {
-    //   backgroundColor: '#fff',
-    //   borderRadius: '50%',
-    // },
-
-    // 'audio::-webkit-media-controls-current-time-display, audio::-webkit-media-controls-time-remaining-display':
-    //   {
-    //     color: '#fff',
-    //   },
 
     '& audio': {
       maxWidth: '100%',

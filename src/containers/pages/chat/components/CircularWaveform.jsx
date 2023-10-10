@@ -1,15 +1,15 @@
-import React, { memo, useEffect, useRef, useState } from 'react';
+import React, { memo, useEffect, useRef } from 'react';
 import propTypes from 'prop-types';
 
 import staticCircle from 'assets/avatar-image.png';
 import spectrumAnimation from 'assets/circle-avatar-animation-2.gif';
+import { Box } from '@mui/material';
 import { convertBase64ToBlob } from '../utilities/helpers';
 import { useChatBotContext } from '../context/ChatBotContext';
 
 function CircularWaveform({ message }) {
   const audioRef = useRef(null);
-  const [isAudioCompleted, setAudioCompleted] = useState(false);
-  const { isSpeaking, setSpeaking, isStopped } = useChatBotContext();
+  const { isSpeaking, setSpeaking, isStopped, setStopped } = useChatBotContext();
 
   useEffect(() => {
     if (message?.audio) {
@@ -18,12 +18,14 @@ function CircularWaveform({ message }) {
       audioRef.current = audio;
 
       audio.addEventListener('play', () => {
-        setAudioCompleted(false);
+        if (isStopped) {
+          setStopped(false);
+        }
+
         setSpeaking(true);
       });
 
       audio.addEventListener('ended', () => {
-        setAudioCompleted(true);
         setSpeaking(false);
       });
 
@@ -39,20 +41,25 @@ function CircularWaveform({ message }) {
       audioRef.current.currentTime = 0;
       setSpeaking(false);
     }
-  }, [isSpeaking, audioRef.current, isStopped, isAudioCompleted]);
+  }, [isSpeaking, audioRef.current, isStopped]);
 
   return (
-    <>
-      <img
-        src={isSpeaking ? spectrumAnimation : staticCircle}
-        alt="Circular Spectrum"
-        className="mx-100 mh-100 user-select-none"
-        height={400}
-        width={400}
-      />
+    <Box
+      sx={{
+        background: `url(${
+          isSpeaking ? spectrumAnimation : staticCircle
+        }) center/contain no-repeat`,
+        width: 400,
+        height: 400,
+        maxWidth: '100%',
+        maxHeight: '100%',
 
-      {/* <canvas ref={canvasRef} className="mw-100 mh-100" width={400} height={400} /> */}
-    </>
+        '@media screen and (max-width: 768px)': {
+          width: 230,
+          height: 230,
+        },
+      }}
+    />
   );
 }
 

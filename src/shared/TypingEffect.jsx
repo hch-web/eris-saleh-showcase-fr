@@ -14,7 +14,7 @@ function TypingEffect({ text, isCompleted, handleStop }) {
       const timer = setTimeout(() => {
         setDisplayText(prevState => prevState + text[currentIndex]);
         setCurrentIndex(prevState => prevState + 1);
-      }, 50);
+      }, 40);
 
       return () => {
         clearTimeout(timer);
