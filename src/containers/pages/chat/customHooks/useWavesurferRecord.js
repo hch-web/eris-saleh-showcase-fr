@@ -3,7 +3,13 @@ import WaveSurfer from 'wavesurfer.js';
 import RecordPlugin from 'wavesurfer.js/dist/plugins/record';
 import { getFormatedMsgDate } from '../utilities/helpers';
 
-function useWavesurferRecorder(socketRef, containerRef, setChatMessages, setLoading) {
+function useWavesurferRecorder(
+  socketRef,
+  containerRef,
+  setChatMessages,
+  setLoading,
+  setRecentQuery
+) {
   const [wavesurferRecord, setWavesurferRecord] = useState(null);
   const [isRecording, setRecording] = useState(false);
 
@@ -26,6 +32,9 @@ function useWavesurferRecorder(socketRef, containerRef, setChatMessages, setLoad
         setRecording(false);
         setLoading(true);
         socketRef.current.send(blob);
+
+        setRecentQuery({ query: blob, type: 'audio' });
+
         setChatMessages(prevState => [
           ...prevState,
           {

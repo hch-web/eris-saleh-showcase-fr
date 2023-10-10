@@ -29,9 +29,10 @@ export const chatMessagesContainerStyles = {
 
   '@media screen and (max-width: 768px)': {
     width: '100%',
-    padding: '12px 0 12px 0',
+    padding: '8px 0 8px 0',
     height: 'calc(100vh - 400px)',
     minHeight: '100px',
+    maxHeight: '550px',
   },
 
   '&::-webkit-scrollbar': {

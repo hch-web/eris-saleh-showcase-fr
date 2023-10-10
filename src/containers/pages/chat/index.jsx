@@ -37,7 +37,13 @@ function ChatPage() {
   const socket = useConnectWebsocket();
   useHandleChatMessage(socket, chatMessages, setChatMessages, setLoading);
   const { handleStartRecording, handleStopRecording, isRecording } =
-    useWavesurferRecorder(socket, recordContRef, setChatMessages, setLoading);
+    useWavesurferRecorder(
+      socket,
+      recordContRef,
+      setChatMessages,
+      setLoading,
+      setRecentQuery
+    );
 
   const chatContextValue = useMemo(
     () => ({
@@ -55,7 +61,13 @@ function ChatPage() {
 
   const handleRegenerate = () => {
     setLoading(true);
-    socket.current.send(JSON.stringify({ query: recentQuery, type: 'text' }));
+
+    if (recentQuery?.type === 'audio') {
+      socket.current.send(recentQuery.query);
+    } else {
+      socket.current.send(JSON.stringify(recentQuery));
+    }
+
     messageRef.current.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -67,7 +79,7 @@ function ChatPage() {
         <Container
           maxWidth="xl"
           className="d-flex flex-column align-items-center justify-content-end py-3"
-          sx={{ height: '100vh', minHeight: '450px', maxHeight: '100vh' }}
+          sx={{ height: '100vh', minHeight: '500px' }}
           fixed
         >
           <Navbar />
@@ -143,7 +155,7 @@ function ChatPage() {
               setLoading(true);
               socket.current.send(JSON.stringify(payload));
               setChatMessages(prevState => [...prevState, payload]);
-              setRecentQuery(values?.message);
+              setRecentQuery({ query: values?.message, type: 'text' });
               resetForm();
             }}
           >
