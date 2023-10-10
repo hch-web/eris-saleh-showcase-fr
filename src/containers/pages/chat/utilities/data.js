@@ -6,7 +6,7 @@ export const particlesOptions = {
     size: 'cover',
     position: '50% 50%',
   },
-  fpsLimit: 90,
+  fpsLimit: 60,
   interactivity: {
     events: {
       onClick: {
@@ -19,13 +19,13 @@ export const particlesOptions = {
   },
   particles: {
     color: {
-      value: '#ffffff',
+      value: 'rgba(255, 255, 255, 0.4)',
     },
     links: {
-      color: '#ffffff',
+      color: 'rgba(255, 255, 255, 0.4)',
       distance: 150,
       enable: true,
-      opacity: 0.5,
+      opacity: 0.3,
       width: 1,
     },
     move: {
@@ -46,7 +46,7 @@ export const particlesOptions = {
       value: 100,
     },
     opacity: {
-      value: 0.5,
+      value: 0.4,
     },
     shape: {
       type: 'circle',
