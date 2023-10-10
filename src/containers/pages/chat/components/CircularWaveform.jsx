@@ -1,8 +1,8 @@
 import React, { memo, useEffect, useRef } from 'react';
 import propTypes from 'prop-types';
 
-import staticCircle from 'assets/avatar-image-female-2.png';
-import spectrumAnimation from 'assets/female-avatar-animation-2.gif';
+import staticCircle from 'assets/avatar-image-female-3.png';
+import spectrumAnimation from 'assets/female-avatar-animation-3.gif';
 // import staticCircle from 'assets/avatar-image.png';
 // import spectrumAnimation from 'assets/circle-avatar-animation-2.gif';
 import { Box } from '@mui/material';
