@@ -18,6 +18,8 @@ export NVM_DIR="$HOME/.nvm"
 nvm install v18.18.0
 nvm use v18.18.0
 
+npm install
+
 npm run build;
 
 sudo service nginx restart
