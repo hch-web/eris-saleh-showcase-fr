@@ -22,6 +22,7 @@ function Navbar() {
       alignItems="center"
       justifyContent="space-between"
       py={1}
+      pt={3}
       px={0}
       width={1}
       borderBottom="1px solid #c4c4c4"

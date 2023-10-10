@@ -17,6 +17,7 @@ export const chatInputWrapperStyles = {
   padding: '8px 16px',
   boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.5)',
   borderRadius: '10px',
+  mb: '16px',
 };
 
 export const chatMessagesContainerStyles = {

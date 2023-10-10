@@ -78,7 +78,7 @@ function ChatPage() {
       <Box position="relative" zIndex={4}>
         <Container
           maxWidth="xl"
-          className="d-flex flex-column align-items-center justify-content-end py-3"
+          className="d-flex flex-column align-items-center justify-content-end"
           sx={{ height: '100vh', minHeight: '500px' }}
           fixed
         >
