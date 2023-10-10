@@ -1,10 +1,8 @@
 import React, { memo, useEffect, useRef } from 'react';
 import propTypes from 'prop-types';
 
-import staticCircle from 'assets/avatar-image-female-3.png';
-import spectrumAnimation from 'assets/female-avatar-animation-3.gif';
-// import staticCircle from 'assets/avatar-image.png';
-// import spectrumAnimation from 'assets/circle-avatar-animation-2.gif';
+import staticCircle from 'assets/avatar-image-female-4.png';
+import spectrumAnimation from 'assets/female-avatar-animation-lipsync.gif';
 import { Box } from '@mui/material';
 import { convertBase64ToBlob } from '../utilities/helpers';
 import { useChatBotContext } from '../context/ChatBotContext';
