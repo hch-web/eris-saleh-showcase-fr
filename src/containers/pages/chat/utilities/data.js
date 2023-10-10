@@ -55,7 +55,7 @@ export const particlesOptions = {
       value: { min: 1, max: 3 },
     },
   },
-  detectRetina: true,
+  detectRetina: false,
 };
 
 export const test = '';
