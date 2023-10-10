@@ -32,6 +32,7 @@ function CircularWaveform({ message }) {
   }, [message]);
 
   useEffect(() => {
+    console.log('isSpeaking', isSpeaking);
     if (isSpeaking && isStopped) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
