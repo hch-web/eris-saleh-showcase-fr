@@ -1,6 +1,8 @@
+import bgImage from 'assets/gradient-background.jpg';
+
 export const particlesOptions = {
   background: {
-    image: 'linear-gradient(231deg, rgba(2,0,36,1) 0%, #2f609f 50%, rgba(2,0,36,1) 100%)',
+    image: `url(${bgImage})`,
     size: 'cover',
     position: '50% 50%',
   },

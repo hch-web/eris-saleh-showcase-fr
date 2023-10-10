@@ -1,8 +1,10 @@
 import React, { memo, useEffect, useRef } from 'react';
 import propTypes from 'prop-types';
 
-import staticCircle from 'assets/avatar-image.png';
-import spectrumAnimation from 'assets/circle-avatar-animation-2.gif';
+import staticCircle from 'assets/avatar-image-female-2.png';
+import spectrumAnimation from 'assets/female-avatar-animation-2.gif';
+// import staticCircle from 'assets/avatar-image.png';
+// import spectrumAnimation from 'assets/circle-avatar-animation-2.gif';
 import { Box } from '@mui/material';
 import { convertBase64ToBlob } from '../utilities/helpers';
 import { useChatBotContext } from '../context/ChatBotContext';
@@ -49,14 +51,19 @@ function CircularWaveform({ message }) {
         background: `url(${
           isSpeaking ? spectrumAnimation : staticCircle
         }) center/contain no-repeat`,
-        width: 400,
-        height: 400,
+        width: 300,
+        height: 300,
         maxWidth: '100%',
         maxHeight: '100%',
 
         '@media screen and (max-width: 768px)': {
-          width: 230,
-          height: 230,
+          width: 200,
+          height: 200,
+        },
+
+        '@media screen and (min-height: 1700px) and (min-width: 1500px)': {
+          width: 450,
+          height: 450,
         },
       }}
     />

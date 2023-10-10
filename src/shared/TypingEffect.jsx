@@ -1,20 +1,18 @@
 import React, { memo, useEffect, useState } from 'react';
-import { Box, Menu, MenuItem, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import propTypes from 'prop-types';
-import { RecordVoiceOver } from '@mui/icons-material';
 
 function TypingEffect({ text, isCompleted, handleStop }) {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoScrollEnabled, setAutoScrollEnabled] = useState(true);
-  const [contextMenu, setContextMenu] = useState(null);
 
   useEffect(() => {
     if (text && currentIndex < text?.length && !isCompleted) {
       const timer = setTimeout(() => {
         setDisplayText(prevState => prevState + text[currentIndex]);
         setCurrentIndex(prevState => prevState + 1);
-      }, 40);
+      }, 30);
 
       return () => {
         clearTimeout(timer);
@@ -47,29 +45,8 @@ function TypingEffect({ text, isCompleted, handleStop }) {
     };
   }, [currentIndex]);
 
-  const handleContextMenu = e => {
-    e.preventDefault();
-
-    if (window.getSelection().toString() !== '') {
-      setContextMenu(prevState => (prevState === null ? { mouseX: e.clientX - 2, mouseY: e.clientY - 4 } : null));
-    }
-  };
-
-  const handleCloseMenu = () => {
-    setContextMenu(null);
-  };
-
-  const handleSpeak = () => {
-    const synth = window.speechSynthesis;
-    const selectedText = window.getSelection().toString();
-    const utterance = new SpeechSynthesisUtterance(selectedText);
-    synth.speak(utterance);
-
-    setContextMenu(null);
-  };
-
   return (
-    <Box onContextMenu={handleContextMenu}>
+    <Box>
       <Typography
         variant="body1"
         className="message"
@@ -80,23 +57,6 @@ function TypingEffect({ text, isCompleted, handleStop }) {
       >
         {displayText}
       </Typography>
-
-      <Menu
-        onClose={handleCloseMenu}
-        open={!!contextMenu}
-        anchorReference="anchorPosition"
-        anchorPosition={
-          contextMenu !== null
-            ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
-            : undefined
-        }
-        disablePortal
-        sx={{ '& ul': { padding: 0 } }}
-      >
-        <MenuItem onClick={handleSpeak}>
-          <RecordVoiceOver color="primary" />
-        </MenuItem>
-      </Menu>
     </Box>
   );
 }

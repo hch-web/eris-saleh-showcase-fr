@@ -50,7 +50,6 @@ function ChatPage() {
   );
 
   const particlesInit = useCallback(async engine => {
-    // await loadFull(engine);
     await loadSlim(engine);
   }, []);
 
@@ -91,7 +90,7 @@ function ChatPage() {
           {/* CHAT MESSAGES CONTAINER */}
           {chatMessages?.length > 0 && (
             <ChatBotContext.Provider value={chatContextValue}>
-              <Box className="d-flex align-items-start flex-column flex-md-row w-100 py-2 flex-grow-1">
+              <Box className="d-flex align-items-start flex-column flex-md-row w-100 py-2 flex-grow-1 gap-3 gap-md-0">
                 <Box
                   className="order-1 order-md-0"
                   id="chatbot-cont-wrapper"
