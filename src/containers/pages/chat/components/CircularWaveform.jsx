@@ -62,8 +62,8 @@ function CircularWaveform({ message }) {
         },
 
         '@media screen and (min-height: 1700px) and (min-width: 1500px)': {
-          width: 450,
-          height: 450,
+          width: 550,
+          height: 550,
         },
       }}
     />
