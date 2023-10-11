@@ -35,7 +35,16 @@ function ChatPage() {
 
   // SOCKET CUSTOM HOOKS
   const socket = useConnectWebsocket();
-  useHandleChatMessage(socket, chatMessages, setChatMessages, setLoading);
+  useHandleChatMessage(
+    socket,
+    chatMessages,
+    setChatMessages,
+    setLoading,
+    isSpeaking,
+    setSpeaking,
+    isStopped,
+    setStopped
+  );
   const { handleStartRecording, handleStopRecording, isRecording } =
     useWavesurferRecorder(
       socket,
@@ -132,9 +141,7 @@ function ChatPage() {
                 </Box>
 
                 <Box className="order-0 order-md-1" sx={waveformContainerStyles}>
-                  <CircularWaveform
-                    message={chatMessages?.at(-1)?.audio ? chatMessages?.at(-1) : null}
-                  />
+                  <CircularWaveform />
                 </Box>
               </Box>
             </ChatBotContext.Provider>
