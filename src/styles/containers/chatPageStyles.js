@@ -95,3 +95,21 @@ export const messageResponseBtnStyles = {
     color: 'rgba(255,255,255,0.5)',
   },
 };
+
+export const getImageSpectrumStyles = image => ({
+  background: `url(${image}) center/contain no-repeat`,
+  width: 400,
+  height: 400,
+  maxWidth: '100%',
+  maxHeight: '100%',
+
+  '@media screen and (max-width: 768px)': {
+    width: 200,
+    height: 200,
+  },
+
+  '@media screen and (min-height: 1700px) and (min-width: 1500px)': {
+    width: 550,
+    height: 550,
+  },
+});

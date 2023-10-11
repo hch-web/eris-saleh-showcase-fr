@@ -40,7 +40,7 @@ function useHandleChatMessage(
 
           audio.play().catch(err => {
             // eslint-disable-next-line no-console
-            console.log('Error playing audio: ', err);
+            console.log('Error playing audio', err);
           });
         }
 

@@ -127,6 +127,7 @@ function ChatPage() {
                         type={item?.type}
                         isLast={idx === arr.length - 1}
                         onRegenerate={handleRegenerate}
+                        audio={item?.audio}
                       />
                     ))}
 

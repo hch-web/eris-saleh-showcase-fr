@@ -78,3 +78,12 @@ export const convertBase64ToBlob = base64 => {
 
   return URL.createObjectURL(blob);
 };
+
+export const messagePlayPauseBtnProps = {
+  size: 'small',
+  color: 'whiteColor',
+  sx: {
+    background: 'rgba(255,255,255,.2)',
+    ':hover': { background: 'rgba(255,255,255,.2)' },
+  },
+};
