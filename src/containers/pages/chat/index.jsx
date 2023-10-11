@@ -205,7 +205,11 @@ function ChatPage() {
                     </IconButton>
                   )}
 
-                  <IconButton {...formIconsProps} type="submit">
+                  <IconButton
+                    {...formIconsProps}
+                    type={isRecording ? 'button' : 'submit'}
+                    onClick={isRecording ? handleStopRecording : undefined}
+                  >
                     <Send />
                   </IconButton>
                 </Stack>
