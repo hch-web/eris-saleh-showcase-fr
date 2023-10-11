@@ -1,9 +1,9 @@
 import React, { memo, useEffect, useRef } from 'react';
 import propTypes from 'prop-types';
-
-import staticCircle from 'assets/avatar-image-female-4.png';
-import spectrumAnimation from 'assets/female-avatar-animation-lipsync.gif';
 import { Box } from '@mui/material';
+
+import staticCircle from 'assets/avatar-image-female.png';
+import spectrumAnimation from 'assets/female-avatar-animation-lipsync.gif';
 import { convertBase64ToBlob } from '../utilities/helpers';
 import { useChatBotContext } from '../context/ChatBotContext';
 
@@ -16,6 +16,7 @@ function CircularWaveform({ message }) {
       const blob = convertBase64ToBlob(message.audio);
       const audio = new Audio(blob);
       audioRef.current = audio;
+      audio.load();
 
       audio.addEventListener('play', () => {
         if (isStopped) {
@@ -28,14 +29,12 @@ function CircularWaveform({ message }) {
       audio.addEventListener('ended', () => {
         setSpeaking(false);
       });
-
-      audioRef.current.play().then(() => {});
+      // eslint-disable-next-line no-console
+      audio.play().catch(err => console.log(err));
     }
   }, [message]);
 
   useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log('isSpeaking', isSpeaking);
     if (isSpeaking && isStopped) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
@@ -49,14 +48,14 @@ function CircularWaveform({ message }) {
         background: `url(${
           isSpeaking ? spectrumAnimation : staticCircle
         }) center/contain no-repeat`,
-        width: 300,
-        height: 300,
+        width: 400,
+        height: 400,
         maxWidth: '100%',
         maxHeight: '100%',
 
         '@media screen and (max-width: 768px)': {
-          width: 200,
-          height: 200,
+          width: 350,
+          height: 350,
         },
 
         '@media screen and (min-height: 1700px) and (min-width: 1500px)': {

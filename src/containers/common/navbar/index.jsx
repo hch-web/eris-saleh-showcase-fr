@@ -1,10 +1,10 @@
 import React from 'react';
 import { Stack } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
 
 import erisAiLogo from 'assets/eris-ai-white.png';
 import englishFlag from 'assets/british-english-flag.jpg';
 import arabicFlag from 'assets/uae.jpg';
-import { useDispatch, useSelector } from 'react-redux';
 import { setLanguage } from 'store/slices/languageSlice';
 import FlagButton from './FlagButton';
 
