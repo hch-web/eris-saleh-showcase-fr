@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useRef, useState } from 'react';
+import React, { memo, useMemo, useState } from 'react';
 import { Box, Button, IconButton, Stack, Typography } from '@mui/material';
 import propTypes from 'prop-types';
 
@@ -9,24 +9,21 @@ import {
 import TypingEffect from 'shared/TypingEffect';
 import { PlayArrow, Stop } from '@mui/icons-material';
 import { useChatBotContext } from '../context/ChatBotContext';
-import { convertBase64ToBlob, messagePlayPauseBtnProps } from '../utilities/helpers';
+import { messagePlayPauseBtnProps } from '../utilities/helpers';
+import useHandleVoicePlayback from '../customHooks/useHandleVoicePlayback';
 
 function MessageItem({ message, isQuery, timestamp, type, isLast, onRegenerate, audio }) {
-  const audioRef = useRef(null);
-  const { isSpeaking, setStopped, setSpeaking } = useChatBotContext();
-  const [isPlaying, setPlaying] = useState(false);
+  const { isSpeaking } = useChatBotContext();
   const [isAnimationCompleted, setAnimationCompleted] = useState(false);
   const [isRegenerating, setRegenerating] = useState(false);
   const isAudio = type === 'audio';
 
+  const { handlePlayAudio, handleStopAudio, handleStopResponse, isPlaying } =
+    useHandleVoicePlayback(audio, setAnimationCompleted);
+
   const handleRegenerate = () => {
     setRegenerating(true);
     onRegenerate();
-  };
-
-  const handleStopResponse = () => {
-    setAnimationCompleted(true);
-    setStopped(true);
   };
 
   const isTimestamps = useMemo(() => {
@@ -40,33 +37,6 @@ function MessageItem({ message, isQuery, timestamp, type, isLast, onRegenerate, 
 
     return false;
   }, [isAnimationCompleted, isQuery]);
-
-  const handlePlayAudio = () => {
-    const blob = convertBase64ToBlob(audio);
-    const audioEl = new Audio(blob);
-    audioRef.current = audioEl;
-
-    audioEl.addEventListener('play', () => {
-      setPlaying(true);
-      setSpeaking(true);
-    });
-
-    audioEl.addEventListener('ended', () => {
-      setPlaying(false);
-      setSpeaking(false);
-    });
-
-    audioEl.play();
-  };
-
-  const handleStopAudio = () => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-      setPlaying(false);
-      setSpeaking(false);
-    }
-  };
 
   return (
     <>
@@ -142,7 +112,7 @@ function MessageItem({ message, isQuery, timestamp, type, isLast, onRegenerate, 
 
       {!isQuery && isLast && (
         <Stack direction="row" spacing={2}>
-          {(!isAnimationCompleted || isSpeaking) && (
+          {(!isAnimationCompleted || isSpeaking) && !isPlaying && (
             <Button
               variant="outlined"
               color="greyColor"

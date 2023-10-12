@@ -142,7 +142,9 @@ function ChatPage() {
                 </Box>
 
                 <Box className="order-0 order-md-1" sx={waveformContainerStyles}>
-                  <CircularWaveform />
+                  <CircularWaveform
+                    message={chatMessages?.at(-1)?.audio ? chatMessages?.at(-1) : null}
+                  />
                 </Box>
               </Box>
             </ChatBotContext.Provider>
